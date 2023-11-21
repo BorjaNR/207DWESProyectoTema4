@@ -1,0 +1,83 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/css.css to edit this template
+*/
+/* 
+    Created on : 6 nov 2023, 10:08:57
+    Author     : daw2
+*/
+body {
+        font-family: Verdana;
+        margin: 0;
+        background-image: url(../images/background.jpg);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: 100%;
+        position: relative;
+        padding-bottom: 8rem;
+    }
+        
+    header {
+        background-color: #3399ff;
+        padding: 20px;
+        width: 100%;
+        font-size: 1rem;
+        color: white;
+        margin-bottom: 50px
+    }
+    footer{
+        position: absolute;
+        bottom: 0;
+        background-color: #3399ff;
+        color: white;
+        width: 100%;height:50px; 
+        padding: 20px;
+        text-align: center;
+        font-size: 1.2rem;
+    }
+    footer a{
+        color: white;
+        text-decoration: none;
+        margin: 10px;
+    }
+    table{
+        margin: auto;
+        border-collapse: collapse;
+        width: 75%;
+    }
+    .tabla--1{
+        margin-bottom: 80px;
+    }
+    table tr:nth-child(even){
+        background: #cbe1f8;
+    }
+    table tr:nth-child(odd){
+        background: white;
+    }
+    td{
+        border: 2px solid gray;
+        height: 75px;
+        text-align: center;
+    }
+    tr td:nth-child(1){
+        width: 30px;
+    }
+    .tabla--2 tr td:nth-child(3){
+        width: 150px;
+    }
+    .tabla--2 tr td:nth-child(4){
+        width: 150px;
+    }
+    .tabla--2 tr td:nth-child(5){
+        width: 150px;
+    }
+    .tabla--2 tr td:nth-child(6){
+        width: 150px;
+    }
+    .tabla--1 tr td:nth-child(1){
+        width: auto;
+    }
+    
+
+
+

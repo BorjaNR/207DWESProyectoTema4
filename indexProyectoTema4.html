@@ -1,0 +1,122 @@
+<html>
+    <head>
+        <title>ProyectoTema4</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="webroot/css/style.css"/>
+    </head>
+    <body>
+        <header>
+        <h1>Desarrollo web entorno servidor</h1>
+        </header>
+            <table class="tabla tabla--1">
+                <tr>
+                    <td>Scripts SQL</td>
+                    <td>Código</td>
+                </tr>
+                <tr>
+                    <td>Script creación de base de datos y usuario:</td>
+                    <td><a href="./mostrarcodigo/muestraCreacionBDUsuarios.php"><img src="./webroot/images/visualizacion.png" width="40" height="40" alt="Visualizar"/></a></td>
+                </tr>
+                <tr>
+                    <td>Script carga inicial de base de datos:</td>
+                    <td><a href="./mostrarcodigo/muestraCargaBD.php"><img src="./webroot/images/visualizacion.png" width="40" height="40" alt="Visualizar"/></a></td>
+                </tr>
+                <tr>
+                    <td>Script borrado de base de datos y usuario:</td>
+                    <td><a href="./mostrarcodigo/muestraBorradoBDUsuarios.php"><img src="./webroot/images/visualizacion.png" width="40" height="40" alt="Visualizar"/></a></td>
+                </tr>
+            </table>
+            <table class="tabla tabla--2">
+                <tr>
+                    <td>#</td>
+                    <td>Ejercicio</td>
+                    <td>Ejecucion PDO</td>
+                    <td>Visualizacion PDO</td>
+                    <td>Ejecucion MySQLi</td>
+                    <td>Visualizacion MySQLi</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>(ProyectoTema4) Conexión a la base de datos con la cuenta usuario y tratamiento de errores.</td>
+                    <td><a href="./codigoPHP/ejercicio01.php"><img src="./webroot/images/ejecucion.png" width="40" height="40" alt="Ejecutar"/></a></td>
+                    <td><a href="./mostrarcodigo/muestraEjercicio01.php"><img src="./webroot/images/visualizacion.png" width="40" height="40" alt="Visualizar"/></a></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Mostrar el contenido de la tabla Departamento y el número de registros.</td>
+                    <td><a href="./codigoPHP/ejercicio02.php"><img src="./webroot/images/ejecucion.png" width="40" height="40" alt="Ejecutar"/></a></td>
+                    <td><a href="./mostrarcodigo/muestraEjercicio02.php"><img src="./webroot/images/visualizacion.png" width="40" height="40" alt="Visualizar"/></a></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Formulario para añadir un departamento a la tabla Departamento con validación de entrada y control de errores.</td>
+                    <td><a href="./codigoPHP/ejercicio03.php"><img src="./webroot/images/ejecucion.png" width="40" height="40" alt="Ejecutar"/></a></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Formulario de búsqueda de departamentos por descripción (por una parte del campo DescDepartamento, si el usuario no pone nada deben aparecer todos los 
+                        departamentos).</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Pagina web que añade tres registros a nuestra tabla Departamento utilizando tres instrucciones insert y una transacción, de tal forma que se añadan los tres 
+                        registros o no se añada ninguno.</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>Pagina web que cargue registros en la tabla Departamento desde un array departamentosnuevos utilizando una consulta preparada. (Después de programar y entender 
+                        este ejercicio, modificar los ejercicios anteriores para que utilicen consultas preparadas). Probar consultas preparadas sin bind, pasando los parámetros en un 
+                        array a execute.</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>Página web que toma datos (código y descripción) de un fichero xml y los añade a la tabla Departamento de nuestra base de datos. (IMPORTAR). 
+                        El fichero importado se encuentra en el directorio .../tmp/ del servidor</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>Página web que toma datos (código y descripción) de la tabla Departamento y guarda en un fichero departamento.xml. (COPIA DE SEGURIDAD / EXPORTAR). El fichero 
+                        exportado se encuentra en el directorio .../tmp/ del servidor. Si el alumno dispone de tiempo probar distintos formatos de importación - exportación: XML, JSON, 
+                        CSV, TXT,... Si el alumno dispone de tiempo probar a exportar e importar a o desde un directorio (a elegir) en el equipo cliente.</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+        <footer>
+            <a title="Inicio" href="../207DWESProyectoDWES/indexProyectoDWES.html"><img src="./webroot/images/casa.png" width="40" height="40" alt="Inicio"/></a>
+            <a title="GitHub" href="https://github.com/BorjaNR" target="blank"><img src="./webroot/images/git.png" width="40" height="40" alt="GitHub"/></a>
+            <div>
+                <a>2023-24 IES los Sauces. @Todos los derechos reservados. Borja Nuñez Refoyo</a>
+            </div>
+        </footer>
+    </body>
+</html>
+
+
+
