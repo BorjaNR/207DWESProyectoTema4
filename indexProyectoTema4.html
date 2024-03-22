@@ -1,0 +1,175 @@
+<html>
+    <head>
+        <title>ProyectoTema4</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="webroot/css/main.css"/>
+    </head>
+    <body>
+        <header class="text-center bg-secondary text-white">
+            <h1>Ejercicios Tema 4 - Técnicas de acceso a datos en PHP</h1>
+        </header>
+            <div class="container t-container">
+            <table class="table table-striped table-bordered" style="margin-bottom: 75px;"> 
+                <tr class="table-secondary">
+                    <td>Fichero de Configuración con la Base de Datos</td>
+                    <td>Código ED</td>
+                    <td>Código EE</td>
+                </tr>
+                <tr>
+                    <td>Configuración DB PDO:</td>
+                    <td><a href="./mostrarcodigo/muestraConfPDO.php"><img src="./webroot/images/visualizar.png" width="40" height="40" alt="Mostrar" class="rounded mx-auto d-block"/></a></td>
+                    <td>Mostrar</td>
+                </tr>
+                <tr>
+                    <td>Configuración DB MYSQLI:</td>
+                    <td><a href="./mostrarcodigo/muestraConfMYSQLI.php"><img src="./webroot/images/visualizar.png" width="40" height="40" alt="Mostrar" class="rounded mx-auto d-block"/></a></td>
+                    <td>Mostrar</td>
+                </tr>
+            </table>
+            <table class="table table-striped table-bordered" style="margin-bottom: 75px;"> 
+                <tr class="table-secondary">
+                    <td>Scripts - SQL</td>
+                    <td>Código ED</td>
+                    <td>Ejecutar EE</td>
+                    <td>Código EE</td>
+                </tr>
+                <tr>
+                    <td>Script creación de base de datos y usuario:</td>
+                    <td><a href="./mostrarcodigo/muestraCreacion.php"><img src="./webroot/images/visualizar.png" width="40" height="40" alt="Mostrar" class="rounded mx-auto d-block"/></a></td>
+                    <td>Ejecutar</td>
+                    <td>Mostrar</td>
+                </tr>
+                <tr>
+                    <td>Script carga inicial de base de datos:</td>
+                    <td><a href="./mostrarcodigo/muestraCarga.php"><img src="./webroot/images/visualizar.png" width="40" height="40" alt="Mostrar" class="rounded mx-auto d-block"/></a></td>
+                    <td>Ejecutar</td>
+                    <td>Mostrar</td>
+                </tr>
+                <tr>
+                    <td>Script borrado de base de datos y usuario:</td>
+                    <td><a href="./mostrarcodigo/muestraBorrado.php"><img src="./webroot/images/visualizar.png" width="40" height="40" alt="Mostrar" class="rounded mx-auto d-block"/></a></td>
+                    <td>Ejecutar</td>
+                    <td>Mostrar</td>
+                </tr>
+            </table>
+            <table class="table table-striped table-bordered" style="margin-bottom: 75px;"> 
+                <tr class="table-secondary">
+                    <td>#</td>
+                    <td>Ejercicio</td>
+                    <td>Ejecutar PHP</td>
+                    <td>Visualizar PHP</td>
+                    <td>Ejecutar JAVA</td>
+                    <td>Visualizar JAVA</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Conexión a la base de datos con la cuenta usuario y tratamiento de errores.</td>
+                    <td><a href="./codigoPHP/ejercicio01.php"><img src="./webroot/images/play.png" width="40" height="40" alt="Ejecutar" class="rounded mx-auto d-block"/></a></td>
+                    <td><a href="./mostrarcodigo/muestraEjercicio01.php"><img src="./webroot/images/visualizar.png" width="40" height="40" alt="Mostrar" class="rounded mx-auto d-block"/></a></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Mostrar el contenido de la tabla Departamento y el número de registros.</td>
+                    <td><a href="./codigoPHP/ejercicio02.php"><img src="./webroot/images/play.png" width="40" height="40" alt="Ejecutar" class="rounded mx-auto d-block"/></a></td>
+                    <td><a href="./mostrarcodigo/muestraEjercicio02.php"><img src="./webroot/images/visualizar.png" width="40" height="40" alt="Mostrar" class="rounded mx-auto d-block"/></a></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Formulario para añadir un departamento a la tabla Departamento con validación de entrada y control de errores.</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Formulario de búsqueda de departamentos por descripción (por una parte del campo DescDepartamento, si el usuario no pone nada deben aparecer todos los departamentos).</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Pagina web que añade tres registros a nuestra tabla Departamento utilizando tres instrucciones insert y una transacción, de tal forma que se añadan los tres 
+                    registros o no se añada ninguno.</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>Pagina web que cargue registros en la tabla Departamento desde un array departamentos nuevos utilizando una consulta preparada.</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>Página web que toma datos de un fichero json y los añade a la tabla T02_Departamento de nuestra base de datos. El fichero importado se encuentra en el 
+                    directorio .../tmp/ del servidor.</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>7.1</td>
+                    <td>Página web que toma datos de un fichero xml y los añade a la tabla T02_Departamento de nuestra base de datos. El fichero importado se encuentra en el directorio 
+                    .../tmp/ del servidor.</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>Página web que toma datos de la tabla T02_Departamento y guarda en un fichero departamento.json. El fichero exportado se encuentra en el directorio .../tmp/ 
+                        del servidor.</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>8.1</td>
+                    <td>Página web que toma datos de la tabla T02_Departamento y guarda en un fichero departamento.xml. El fichero exportado se encuentra en el directorio .../tmp/ 
+                        del servidor.</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>Aplicación resumen MtoDeDepartamentosTema4.</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+            </div>
+        <footer class="text-center bg-secondary fixed-bottom py-3">
+            <div class="container">
+                <div class="row">
+                    <div class="col text-center text-white">
+                        <p>&copy;2023-24 IES los Sauces. Todos los derechos reservados. <a href="../index.html" style="color: white; text-decoration: none">Borja Nuñez Refoyo</a></p>
+                    </div>
+                    <div class="col text-end">
+                        <a title="Inicio" href="../207DWESProyectoDWES/indexProyectoDWES.html"><img src="./webroot/images/casa.png" width="40" height="40" alt="Inicio"/></a>
+                        <a title="GitHub" href="https://github.com/BorjaNR/207DWESProyectoTema3" target="blank"><img src="./webroot/images/git.png" width="40" height="40" alt="GitHub"/></a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <script src="./webroot/js/mainjs.js" ></script>
+    </body>
+</html>
