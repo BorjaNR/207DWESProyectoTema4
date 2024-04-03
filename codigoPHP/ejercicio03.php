@@ -41,31 +41,31 @@
             //Cargar valores por defecto en los campos del formulario
             //Para cada campo del formulario: Validar entrada y actuar en consecuencia
             if (isset($_REQUEST['enviar'])) {
-            //Valido la entrada de codigo departamento
-            $aErrores['codDepartamento'] = validacionFormularios::comprobarAlfabetico($_REQUEST['codDepartamento'], 3, 3, 1);
+                //Valido la entrada de codigo departamento
+                $aErrores['codDepartamento'] = validacionFormularios::comprobarAlfabetico($_REQUEST['codDepartamento'], 3, 3, 1);
 
-            // Ahora validamos que el codigo introducido no exista en la BD, haciendo una consulta 
-            if ($aErrores['codDepartamento'] == null) {
-            try {
-            //Intentamos establecer la conexión con la base de datos
-            $miDB = new PDO(DSN, USERNAME, PASSWORD);
-            // Configuramos las excepciones
-            $miDB->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            // En esta línea utilizo 'quote()' se utiliza para escapar y citar el valor del $_REQUEST['codDepartamento'], ayudando a prevenir la inyección de SQL.
-            $codDepartamento = $miDB->quote($_REQUEST['codDepartamento']);
-            //Preparamos la consulta y la ejecutamos
-            $consultaDepartamento = $miDB->prepare("SELECT T02_CodDepartamento FROM T02_Departamento WHERE T02_CodDepartamento = $codDepartamento");
-            $consultaDepartamento->execute();
+                // Ahora validamos que el codigo introducido no exista en la BD, haciendo una consulta 
+                if ($aErrores['codDepartamento'] == null) {
+                    try {
+                        //Intentamos establecer la conexión con la base de datos
+                        $miDB = new PDO(DSN, USERNAME, PASSWORD);
+                        // Configuramos las excepciones
+                        $miDB->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                        // En esta línea utilizo 'quote()' se utiliza para escapar y citar el valor del $_REQUEST['codDepartamento'], ayudando a prevenir la inyección de SQL.
+                        $codDepartamento = $miDB->quote($_REQUEST['codDepartamento']);
+                        //Preparamos la consulta y la ejecutamos
+                        $consultaDepartamento = $miDB->prepare("SELECT T02_CodDepartamento FROM T02_Departamento WHERE T02_CodDepartamento = $codDepartamento");
+                        $consultaDepartamento->execute();
 
-            //Comprobación de que exista el departamento y su mensaje personalizado
-            if ($consultaDepartamento->fetchObject()) {
-            $aErrores['codDepartamento'] = "Ya existe ese código de departamento";
-            }
-            } catch (PDOException $pdoe) {
-            echo ('<p style="color:red">EXCEPCION PDO</p>' . $pdoe->getMessage());
-            } finally {
-            unset($miDB); //Para cerrar la conexión
-            }
+                        //Comprobación de que exista el departamento y su mensaje personalizado
+                        if ($consultaDepartamento->fetchObject()) {
+                            $aErrores['codDepartamento'] = "Ya existe ese código de departamento";
+                        }
+                    } catch (PDOException $pdoe) {
+                        echo ('<p style="color:red">EXCEPCION PDO</p>' . $pdoe->getMessage());
+                    } finally {
+                        unset($miDB); //Para cerrar la conexión
+                    }
             }
 
             //Validar entrada
@@ -73,79 +73,79 @@
             $aErrores['volumen'] = validacionFormularios::comprobarFloat($_REQUEST['volumen'], PHP_FLOAT_MAX, PHP_FLOAT_MIN, 1); //Valido que sea un numero real y obligatorio
             //Recorremos los errores para ver si hay alguno
             foreach ($aErrores as $campo => $error) {
-            if ($error ==!null) {
-            $entradaOK = false;
-            //Limpiar campos malos
-            $_REQUEST[$campo] = '';
-            }
+                if ($error ==!null) {
+                    $entradaOK = false;
+                    //Limpiar campos malos
+                    $_REQUEST[$campo] = '';
+                }
             }
             } else {
-            $entradaOK = false;
+                $entradaOK = false;
             }
 
             //Tratamiento del formulario
             if ($entradaOK) {
-            //Utilizamos el bloque try catch
-            try {
-            //Intentamos establecer la conexión con la base de datos
-            $miDB = new PDO(DSN, USERNAME, PASSWORD);
-            // Configuramos las excepciones
-            $miDB->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            // Cargo el array con las respuestas
-            $aRespuestas['codDepartamento'] = strtoupper($_REQUEST['codDepartamento']);
-            $aRespuestas['descDepartamento'] = $_REQUEST['descDepartamento'];
-            $aRespuestas['fechaCreacion'] = 'now()'; // Cargo la fecha actual y hora actual
-            $aRespuestas['volumen'] = $_REQUEST['volumen'];
+                //Utilizamos el bloque try catch
+                try {
+                    //Intentamos establecer la conexión con la base de datos
+                    $miDB = new PDO(DSN, USERNAME, PASSWORD);
+                    // Configuramos las excepciones
+                    $miDB->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                    // Cargo el array con las respuestas
+                    $aRespuestas['codDepartamento'] = strtoupper($_REQUEST['codDepartamento']);
+                    $aRespuestas['descDepartamento'] = $_REQUEST['descDepartamento'];
+                    $aRespuestas['fechaCreacion'] = 'now()'; // Cargo la fecha actual y hora actual
+                    $aRespuestas['volumen'] = $_REQUEST['volumen'];
 
-            // CONSULTA CON QUERY()
-            // Se ejecuta la consulta de insercion                    
-            $numeroFilas = $miDB->exec("INSERT INTO T02_Departamento VALUES ('" . $aRespuestas['codDepartamento'] . "','" . $aRespuestas['descDepartamento'] . "'," . $aRespuestas['fechaCreacion'] . "," . $aRespuestas['volumen'] . ",NULL );");
-            // Ejecutando la declaración SQL y mostramos un mensaje en caso de que se inserte u ocurra un error.
-            if ($numeroFilas > 0) {
-            echo "Los datos se han insertado correctamente en la tabla Departamento.";
+                    // CONSULTA CON QUERY()
+                    // Se ejecuta la consulta de insercion                    
+                    $numeroFilas = $miDB->exec("INSERT INTO T02_Departamento VALUES ('" . $aRespuestas['codDepartamento'] . "','" . $aRespuestas['descDepartamento'] . "'," . $aRespuestas['fechaCreacion'] . "," . $aRespuestas['volumen'] . ",NULL );");
+                    // Ejecutando la declaración SQL y mostramos un mensaje en caso de que se inserte u ocurra un error.
+                    if ($numeroFilas > 0) {
+                    echo "Los datos se han insertado correctamente en la tabla Departamento.";
 
-            $consultaPreparada = $miDB->prepare("SELECT * FROM T02_Departamento");
-            $consultaPreparada->execute();
+                    $consultaPreparada = $miDB->prepare("SELECT * FROM T02_Departamento");
+                    $consultaPreparada->execute();
 
-            //Creamos la tabla
-            ?>
-            <div class="container t-container">
-                <table class="table table-striped table-bordered" style="margin-bottom: 75px;"> 
-                    <tr class="table-secondary">
-                        <th>Codigo de Departamento</th>
-                        <th>Descripcion de Departamento</th>
-                        <th>Fecha de Creacion</th>
-                        <th>Volumen de Negocio</th>
-                        <th>Fecha de Baja</th>
-                    </tr>
-                    <?php
-                    /* Aqui recorremos todos los valores de la tabla, columna por columna, usando el parametro 'PDO::FETCH_ASSOC' , 
-                     * el cual nos indica que los resultados deben ser devueltos como un array asociativo, donde los nombres de las columnas de 
-                     * la tabla se utilizan como claves (keys) en el array. */
-                    while ($oDepartamento = $consultaPreparada->fetchObject()) {
-                    echo '<tr>';
-                    echo "<td>" . $oDepartamento->T02_CodDepartamento . "</td>";
-                    echo "<td>" . $oDepartamento->T02_DescDepartamento . "</td>";
-                    echo "<td>" . $oDepartamento->T02_FechaCreacionDepartamento . "</td>";
-                    echo "<td>" . $oDepartamento->T02_VolumenDeNegocio . "</td>";
-                    echo "<td>" . $oDepartamento->T02_FechaBajaDepartamento . "</td>";
-                    echo '</tr>';
-                    }
-                    ?>
-                    <tr>
-                        <td colspan="5"><?php echo "Numero de registros en la tabla departamentos: " . $consultaPreparada->rowCount(); ?></td>
-                    </tr>
-                </table>
-            </div>
-            <?php
-            } else {
-            echo "Hubo un error al insertar los datos en la tabla Departamento.";
-            }
-            } catch (PDOException $pdoe) {
-            echo ('<p style="color:red">EXCEPCION PDO</p>' . $pdoe->getMessage());
-            } finally {
-            unset($miDB); //Para cerrar la conexión
-            }
+                //Creamos la tabla
+                ?>
+                <div class="container t-container">
+                    <table class="table table-striped table-bordered" style="margin-bottom: 75px;"> 
+                        <tr class="table-secondary">
+                            <th>Codigo de Departamento</th>
+                            <th>Descripcion de Departamento</th>
+                            <th>Fecha de Creacion</th>
+                            <th>Volumen de Negocio</th>
+                            <th>Fecha de Baja</th>
+                        </tr>
+                        <?php
+                        /* Aqui recorremos todos los valores de la tabla, columna por columna, usando el parametro 'PDO::FETCH_ASSOC' , 
+                         * el cual nos indica que los resultados deben ser devueltos como un array asociativo, donde los nombres de las columnas de 
+                         * la tabla se utilizan como claves (keys) en el array. */
+                        while ($oDepartamento = $consultaPreparada->fetchObject()) {
+                        echo '<tr>';
+                        echo "<td>" . $oDepartamento->T02_CodDepartamento . "</td>";
+                        echo "<td>" . $oDepartamento->T02_DescDepartamento . "</td>";
+                        echo "<td>" . $oDepartamento->T02_FechaCreacionDepartamento . "</td>";
+                        echo "<td>" . $oDepartamento->T02_VolumenDeNegocio . "</td>";
+                        echo "<td>" . $oDepartamento->T02_FechaBajaDepartamento . "</td>";
+                        echo '</tr>';
+                        }
+                        ?>
+                        <tr>
+                            <td colspan="5"><?php echo "Numero de registros en la tabla departamentos: " . $consultaPreparada->rowCount(); ?></td>
+                        </tr>
+                    </table>
+                </div>
+                <?php
+                } else {
+                    echo "Hubo un error al insertar los datos en la tabla Departamento.";
+                }
+                } catch (PDOException $pdoe) {
+                    echo ('<p style="color:red">EXCEPCION PDO</p>' . $pdoe->getMessage());
+                } finally {
+                    unset($miDB); //Para cerrar la conexión
+                }
             } else {
             ?>
             <form class="w-40 position-absolute top-50 start-50 translate-middle" name="fomrulario" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">

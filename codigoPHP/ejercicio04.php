@@ -66,7 +66,7 @@
                 //Creamos la tabla
                 ?>
                 <div class="container t-container  position-absolute top-50 start-50 translate-middle">
-                    <table class="table table-striped table-bordered" style="margin-bottom: 75px;"> 
+                    <table class="table table-striped table-bordered" style="margin-bottom: 75px; margin-top: 75px"> 
                         <tr class="table-secondary">
                             <th>Codigo de Departamento</th>
                             <th>Descripcion de Departamento</th>
@@ -120,7 +120,7 @@
                     //Creamos la tabla
                     ?>
                     <div class="container t-container  position-absolute top-50 start-50 translate-middle">
-                        <table class="table table-striped table-bordered" style="margin-bottom: 75px;"> 
+                        <table class="table table-striped table-bordered" style="margin-bottom: 75px; margin-top: 75px"> 
                             <tr class="table-secondary">
                                 <th>Codigo de Departamento</th>
                                 <th>Descripcion de Departamento</th>
