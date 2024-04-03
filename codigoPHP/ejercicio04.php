@@ -15,7 +15,7 @@
             /**
              * @author Borja Nuñez Refoyo
              * @version 2.0 
-             * @since 21/03/2024
+             * @since 29/03/2024
              */
             //Incluimos el archivo de configuración de la conexión a la base de datos
             require_once '../config/confDBPDO.php';
