@@ -63,8 +63,8 @@
                 </div>
                 <?php
                 //Si falla la conexión controlaremos la excepción con el catch y mostraremos el mensaje de error
-            } catch (PDOException $pdoe) {
-                echo ('<p style="color:red">EXCEPCION PDO</p>' . $pdoe->getMessage());
+            } catch (mysqli_sql_exception $mse) {
+                echo ('<p style="color:red">ERROR DE CONEXIÓN</p>' . $mse->getMessage());
             } finally {
                 unset($miDB); //Para cerrar la conexión
             }

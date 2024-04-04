@@ -25,8 +25,6 @@
             try {
                 //Intentamos establecer la conexión con la base de datos
                 $miDB = new PDO(DSN, USERNAME, PASSWORD);
-                //Si la conexión a sido exitosa mostramos que lo ha sido con un mensaje
-                echo '<p style="color:green">CONEXIÓN EXITOSA</p>';
 
                 //Preparamos la consulta y la ejecutamos
                 $consultaPreparada = $miDB->prepare("SELECT * FROM T02_Departamento");
