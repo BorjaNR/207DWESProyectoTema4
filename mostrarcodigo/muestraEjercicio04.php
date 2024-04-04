@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>ConfiguracionMYSQLI</title>
+        <title>muestraejercicio04</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../webroot/css/main.css"/>
     </head>
     <body>
-        <header class="text-center bg-secondary h-100 text-white">
-            <h3>ConfiguracionMySQLi</h3>
+        <header class="text-center bg-secondary text-white">
+            <h3>4. Formulario de búsqueda de departamentos por descripción (por una parte del campo DescDepartamento, si el usuario no pone nada deben aparecer todos los departamentos).</h3>
         </header>
         <main class="h-100 w-100">
             <?php
-            show_source($filename = "../config/confDBMYSQLI.php");
+            show_source($filename = "../codigoPHP/ejercicio04.php");
             ?>
         </main>
         <footer class="text-center bg-secondary fixed-bottom py-3">

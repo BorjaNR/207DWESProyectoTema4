@@ -33,7 +33,7 @@
                 $consultaPreparada->execute();
 
                 //Creamos la tabla
-                ?>
+            ?>
                 <div class="container t-container">
                     <table class="table table-striped table-bordered" style="margin-bottom: 75px;"> 
                         <tr class="table-secondary">
@@ -44,10 +44,13 @@
                             <th>Fecha de Baja</th>
                         </tr>
                         <?php
+                        /* Aqui recorremos todos los valores de la tabla, columna por columna, usando el parametro 'PDO::FETCH_ASSOC' , 
+                         * el cual nos indica que los resultados deben ser devueltos como un array asociativo, donde los nombres de las columnas de 
+                         * la tabla se utilizan como claves (keys) en el array.*/
                         while ($oDepartamento = $consultaPreparada->fetchObject()) {
                             echo '<tr>';
                                 echo "<td>" . $oDepartamento->T02_CodDepartamento . "</td>";
-                                echo "<td>" . $oDepartamento->T02_DescDepartamento . "</td>)";
+                                echo "<td>" . $oDepartamento->T02_DescDepartamento . "</td>";
                                 echo "<td>" . $oDepartamento->T02_FechaCreacionDepartamento . "</td>";
                                 echo "<td>" . $oDepartamento->T02_VolumenDeNegocio . "</td>";
                                 echo "<td>" . $oDepartamento->T02_FechaBajaDepartamento . "</td>";
@@ -59,12 +62,43 @@
                         </tr>
                     </table>
                 </div>
-                <?php
+            <?php
+                echo '<h3>Con consulta normal</h3>';
+                //Hacemos la consulta
+                $consulta = $miDB->query("SELECT * FROM T02_Departamento");
+            ?>
+                <div class="container t-container">
+                    <table class="table table-striped table-bordered" style="margin-bottom: 75px;"> 
+                        <tr class="table-secondary">
+                            <th>Codigo de Departamento</th>
+                            <th>Descripcion de Departamento</th>
+                            <th>Fecha de Creacion</th>
+                            <th>Volumen de Negocio</th>
+                            <th>Fecha de Baja</th>
+                        </tr>
+                        <?php
+                        while ($oDepartamento = $consulta->fetchObject()) {
+                            echo '<tr>';
+                                echo "<td>" . $oDepartamento->T02_CodDepartamento . "</td>";
+                                echo "<td>" . $oDepartamento->T02_DescDepartamento . "</td>";
+                                echo "<td>" . $oDepartamento->T02_FechaCreacionDepartamento . "</td>";
+                                echo "<td>" . $oDepartamento->T02_VolumenDeNegocio . "</td>";
+                                echo "<td>" . $oDepartamento->T02_FechaBajaDepartamento . "</td>";
+                            echo '</tr>';
+                        }
+                        ?>
+                        <tr>
+                            <td colspan="5"><?php echo "Numero de registros en la tabla departamentos: " . $consultaPreparada->rowCount(); ?></td>
+                        </tr>
+                    </table>
+                </div>
+            <?php
                 //Si falla la conexión controlaremos la excepción con el catch y mostraremos el mensaje de error
-            } catch (PDOException $pdoe) {
-                echo ('<p style=color:"red">ERROR DE CONEXIÓN</p><br>' . $pdoe->getMessage());
-            }
-            unset($miDB); //Para cerrar la conexión
+                } catch (PDOException $pdoe) {
+                    echo ('<p style="color:red">EXCEPCION PDO</p>' . $pdoe->getMessage());
+                }finally{
+                    unset($miDB); //Para cerrar la conexión
+                }
             ?>
 
         </main>
@@ -76,7 +110,7 @@
                     </div>
                     <div class="col text-end">
                         <a title="Inicio" href="../indexProyectoTema4.html"><img src="../webroot/images/casa.png" width="40" height="40" alt="Inicio"/></a>
-                        <a title="GitHub" href="https://github.com/BorjaNR/207DWESProyectoTema3" target="blank"><img src="../webroot/images/git.png" width="40" height="40" alt="GitHub"/></a>
+                        <a title="GitHub" href="https://github.com/BorjaNR/207DWESProyectoTema4" target="blank"><img src="../webroot/images/git.png" width="40" height="40" alt="GitHub"/></a>
                     </div>
                 </div>
             </div>

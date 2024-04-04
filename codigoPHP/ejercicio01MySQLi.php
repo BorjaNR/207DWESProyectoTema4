@@ -11,7 +11,7 @@
             <h3>1. Conexión a la base de datos con la cuenta usuario y tratamiento de errores.</h3>
         </header>
         <main style="margin-bottom: 75px" class="fs-5">
-            <h3>Conexion con PDO exitosa</h3>
+            <h3>Conexion con MySQLi exitosa</h3>
             <?php
             /**
              * @author Borja Nuñez Refoyo
@@ -19,45 +19,42 @@
              * @since 21/03/2024
              */
             //Incluimos el archivo de configuración de la conexión a la base de datos
-            require_once '../config/confDBPDO.php';
+            require_once '../config/confDBMYSQLI.php';
 
             //Utilizamos el bloque try catch para intentar la conexión a la base de datos
             try {
                 //Intentamos establecer la conexión con la base de datos
-                $miDB = new PDO(DSN, USERNAME, PASSWORD);
+                $miDB = new mysqli(DSN, USERNAME, PASSWORD, DBNAME);
                 //Si la conexión a sido exitosa mostramos que lo ha sido con un mensaje
                 echo '<p style="color:green">CONEXIÓN EXITOSA</p>';
-
-                //Mostramos todos los atributos
-                echo '<p>Atributos: </p><br>';
-                echo "PDO::ATTR_AUTOCOMMIT " . $miDB->getAttribute(PDO::ATTR_AUTOCOMMIT) . "<br>";
-                echo "PDO::ATTR_ERRMODE " . $miDB->getAttribute(PDO::ATTR_ERRMODE) . "<br>";
-                echo "PDO::ATTR_CASE " . $miDB->getAttribute(PDO::ATTR_CASE) . "<br>";
-                echo "PDO::ATTR_CLIENT_VERSION " . $miDB->getAttribute(PDO::ATTR_CLIENT_VERSION) . "<br>";
-                echo "PDO::ATTR_CONNECTION_STATUS " . $miDB->getAttribute(PDO::ATTR_CONNECTION_STATUS) . "<br>";
-                echo "PDO::ATTR_ORACLE_NULLS " . $miDB->getAttribute(PDO::ATTR_ORACLE_NULLS) . "<br>";
-                echo "PDO::ATTR_SERVER_INFO " . $miDB->getAttribute(PDO::ATTR_SERVER_INFO) . "<br>";
-                echo "PDO::ATTR_SERVER_VERSION " . $miDB->getAttribute(PDO::ATTR_SERVER_VERSION) . "<br>";
+                //Ahora mostraremos la informacion del host
+                echo '<p>' . $miDB->host_info . '</p>';
                 //Si falla la conexión controlaremos la excepción con el catch y mostraremos el mensaje de error
-            } catch (PDOException $pdoe) {
-                echo ('<p style=color:"red">ERROR DE CONEXIÓN</p><br>' . $pdoe->getMessage());
+            } catch (mysqli_sql_exception $mse) {
+                echo ('<p style=color:"red">ERROR DE CONEXIÓN</p><br>' . $mse->getMessage());
+            } finally {
+                if ($miDB && $miDB->connect_errno === 0) {
+                    $miDB->close(); // Cerramos la conexión
+                }
             }
-            unset($miDB); //Para cerrar la conexión
             
-            echo '<h3>Conexion con PDO fallida</h3>';
+            echo '<h3>Conexion con MySQLi fallida</h3>';
             
             //Utilizamos el bloque try catch para intentar la conexión a la base de datos
             try {
                 //Intentamos establecer la conexión con la base de datos
-                $miDB = new PDO(DSN, USERNAME, 'l');//Aqui ponemos un dato mal
+                $miDB = new mysqli(DSN, USERNAME, '1', DBNAME);//Aqui ponemos un dato mal
                 //Si la conexión a sido exitosa mostramos que lo ha sido con un mensaje
                 echo '<p style="color:green">CONEXIÓN EXITOSA</p>';
                 //Si falla la conexión controlaremos la excepción con el catch y mostraremos el mensaje de error
-            } catch (PDOException $pdoe) {
-                echo ('<p style="color:red">ERROR DE CONEXIÓN</p>' . $pdoe->getMessage());
+            } catch (mysqli_sql_exception $mse) {
+                echo ('<p style="color:red">ERROR DE CONEXIÓN</p>' . $mse->getMessage());
+            } finally {
+                // Comprobamos si no hay ningun error de conexión con la BD
+                if ($miDB && $miDB->connect_errno === 0) {
+                    $miDB->close(); // Cerramos la conexión
+                }
             }
-            unset($miDB); //Para cerrar la conexión
-            ?>
             ?>
         </main>
         <footer class="text-center bg-secondary fixed-bottom py-3">

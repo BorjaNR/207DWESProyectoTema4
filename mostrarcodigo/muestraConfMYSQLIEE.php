@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Carga Inicial</title>
+        <title>ConfiguracionMYSQLI EE</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../webroot/css/main.css"/>
     </head>
     <body>
-        <header class="text-center bg-secondary text-white">
-            <h3>Script carga inicial de base de datos.</h3>
+        <header class="text-center bg-secondary h-100 text-white">
+            <h3>ConfiguracionMySQLi EE</h3>
         </header>
         <main class="h-100 w-100">
             <?php
-            show_source($filename = "../scriptDB/CargaInicialBD.sql");
+            show_source($filename = "../config/confDBMYSQLIEE.php");
             ?>
         </main>
         <footer class="text-center bg-secondary fixed-bottom py-3">
