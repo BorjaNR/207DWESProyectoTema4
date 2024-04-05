@@ -57,16 +57,26 @@
                 
                 //Recorremos el array departamentos nuevos
                 foreach ($aNuevosDepartamentos as $aDepartamento) {
-                    $aRegistros = [
-                        'codDepartamento' => $aDepartamento['codDepartamento'],
-                        'descDepartamento' => $aDepartamento['descDepartamento'],
-                        'fechaCreacion' => $aDepartamento['fechaCreacion'],
-                        'volumen' => $aDepartamento['volumen'],
-                        'fechaBaja' => $aDepartamento['fechaBaja'],
-                    ];
-                    $consultaPreparada->execute($aRegistros);
+                    $consultaPreparada->bindParam(':codDepartamento', $aDepartamento['codDepartamento']);
+                    $consultaPreparada->bindParam(':descDepartamento', $aDepartamento['descDepartamento']);
+                    $consultaPreparada->bindParam(':fechaCreacion', $aDepartamento['fechaCreacion']);
+                    $consultaPreparada->bindParam(':volumen', $aDepartamento['volumen']);
+                    $consultaPreparada->bindParam(':fechaBaja', $aDepartamento['fechaBaja']);
+                    $consultaPreparada->execute();
                 }
-                
+                //Recorremos el array departamentos nuevos
+                /*
+                foreach ($aNuevosDepartamentos as $aDepartamento) {
+                    $aDepartamentoEnCurso = [
+                        ':codDepartamento' => $aDepartamento['codDepartamento'],
+                        ':descDepartamento' => $aDepartamento['descDepartamento'],
+                        ':fechaCreacion' => $aDepartamento['fechaCreacion'],
+                        ':volumen' => $aDepartamento['volumen'],
+                        ':fechaBaja' => $aDepartamento['fechaBaja'],
+                    ];
+                    $consultaPreparada->execute($aDepartamentoEnCurso);
+                }
+                */
                 $miDB->commit(); // Confirma los cambios y los consolida
                 echo '<p style="color:green">DATOS INSERTADOS CORRECTAMENTE</p>';
             } catch (PDOException $pdoe) {
