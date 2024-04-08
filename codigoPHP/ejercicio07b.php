@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>ejercicio07</title>
+        <title>ejercicio07.1</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../webroot/css/main.css"/>
     </head>
     <body>
         <header class="text-center bg-secondary text-white" style="height: 75px">
-            <h3>7. Página web que toma datos de un fichero json y los añade a la tabla T02_Departamento de nuestra base de datos. El fichero importado se encuentra en el directorio 
+            <h3>7.1. Página web que toma datos de un fichero xml y los añade a la tabla T02_Departamento de nuestra base de datos. El fichero importado se encuentra en el directorio 
                 .../tmp/ del servidor.</h3>
         </header>
         <main style="margin-bottom: 75px" class="fs-5 text-center">
@@ -24,58 +24,48 @@
             try {
                 $miDB = new PDO(DSN, USERNAME, PASSWORD);
 
-                // Indicamos la ruta del archivo y la guardamos en una variable
-                $rutaArchivoJSON = '../tmp/departamentos.json';
+                // Creamos un objeto DOMDocument indicando la versión y la codificación del documento como parametros
+                $archivoXML = new DOMDocument("1.0", "utf-8");
+                // Cargamos el archivo 'xml' indicandole la ruta
+                $archivoXML->load('../tmp/departamentos.xml');
 
-                // Leemos el contenido del archivo JSON
-                $contenidoArchivoJSON = file_get_contents($rutaArchivoJSON);
+                $archivoXML->formatOutput = true; //Le asigno la salida con formato
 
-                // Decodificamos el JSON a un array asociativo
-                $aContenidoDecodificadoArchivoJSON = json_decode($contenidoArchivoJSON, true);
-
-                // Verificamos si la decodificación fue exitosa
-                if ($aContenidoDecodificadoArchivoJSON === null && json_last_error() !== JSON_ERROR_NONE) {
-                    // En caso negativo "matamos" la ejecución del script
-                    die('Error al decodificar el archivo JSON.');
-                }
-
+                $departamento = $archivoXML->getElementsByTagName('Departamento'); // Creo el nodo departamento
                 // CONSULTAS Y TRANSACCION
                 $miDB->beginTransaction(); // Deshabilitamos el modo autocommit
                 // Consultas SQL de inserción 
-                $consultaInsercion = <<<CONSULTA
-                                    INSERT INTO T02_Departamento(T02_CodDepartamento, T02_DescDepartamento, T02_FechaCreacionDepartamento, T02_VolumenDeNegocio, T02_FechaBajaDepartamento) 
-                                    VALUES (:CodDepartamento, :DescDepartamento, :FechaCreacionDepartamento, :VolumenDeNegocio, :FechaBajaDepartamento);
-                                    CONSULTA;
+                $consultaInsercion = "INSERT IGNORE INTO T02_Departamento(T02_CodDepartamento, T02_DescDepartamento, T02_FechaCreacionDepartamento, T02_VolumenDeNegocio, T02_FechaBajaDepartamento) "
+                        . "VALUES (:CodDepartamento, :DescDepartamento, :FechaCreacionDepartamento, :VolumenDeNegocio, :FechaBajaDepartamento)";
 
                 // Preparamos las consultas
                 $resultadoconsultaInsercion = $miDB->prepare($consultaInsercion);
 
-                foreach ($aContenidoDecodificadoArchivoJSON as $aDepartamento) {
-                    // Recorremos los registros que vamos a insertar en la tabla
-                    $codDepartamento = $aDepartamento['codDepartamento'];
-                    $descDepartamento = $aDepartamento['descDepartamento'];
-                    $fechaCreacionDepartamento = $aDepartamento['fechaCreacionDepartamento'];
-                    $volumenNegocio = $aDepartamento['volumenNegocio'];
-                    $fechaBajaDepartamento = $aDepartamento['fechaBajaDepartamento'];
+                foreach ($departamento as $valor) {
+                    $codDepartamento = $valor->getElementsByTagName("CodDepartamento")->item(0)->nodeValue;
+                    $descDepartamento = $valor->getElementsByTagName("DescDepartamento")->item(0)->nodeValue;
+                    $fechaCreacionDepartamento = $valor->getElementsByTagName("FechaCreacionDepartamento")->item(0)->nodeValue;
+                    $volumenDeNegocio = $valor->getElementsByTagName("VolumenDeNegocio")->item(0)->nodeValue;
+                    $fechaBajaDepartamento = $valor->getElementsByTagName("FechaBajaDepartamento")->item(0)->nodeValue;
 
-                    // Si la fecha de baja está vacía asignamos el valor 'NULL'
                     if (empty($fechaBajaDepartamento)) {
-                        $fechaBajaDepartamento = NULL;
+                        $fechaBajaDepartamento = null;
                     }
 
-                    $aDepartamentoEnCurso = [
+                    $aRegistros = [
                         ':CodDepartamento' => $codDepartamento,
                         ':DescDepartamento' => $descDepartamento,
                         ':FechaCreacionDepartamento' => $fechaCreacionDepartamento,
-                        ':VolumenDeNegocio' => $volumenNegocio,
+                        ':VolumenDeNegocio' => $volumenDeNegocio,
                         ':FechaBajaDepartamento' => $fechaBajaDepartamento
                     ];
 
-                    $resultadoconsultaInsercion->execute($aDepartamentoEnCurso);
+                    $resultadoconsultaInsercion->execute($aRegistros); // Ejecuto la consulta preparada
                 }
 
+
                 $miDB->commit(); // Confirma los cambios y los consolida
-                echo "<span style='color: green'>Importado correctamente</span>";
+               echo "<span style='color: green'>Importado correctamente</span>";
             } catch (PDOException $pdoe) {
                 $miDB->rollBack();
                 echo ('<p style="color:red">EXCEPCION PDO</p>' . $pdoe->getMessage());
@@ -83,48 +73,48 @@
                 // El metodo unset sirve para cerrar la sesion con la base de datos
                 unset($miDB);
             }
-            try{
+            try {
                 //Intentamos establecer la conexión con la base de datos
                 $miDB = new PDO(DSN, USERNAME, PASSWORD);
-                
+
                 $consultaPreparada = $miDB->prepare("SELECT * FROM T02_Departamento");
                 $consultaPreparada->execute();
                 ?>
                 <div class="container t-container  position-absolute top-50 start-50 translate-middle">
                     <table class="table table-striped table-bordered" style="margin-bottom: 75px; margin-top: 150px;"> 
-                         <tr class="table-secondary">
+                        <tr class="table-secondary">
                             <th>Codigo de Departamento</th>
                             <th>Descripcion de Departamento</th>
                             <th>Fecha de Creacion</th>
                             <th>Volumen de Negocio</th>
                             <th>Fecha de Baja</th>
                         </tr>
-                        <?php
-                        /* Aqui recorremos todos los valores de la tabla, columna por columna, usando el parametro 'PDO::FETCH_ASSOC' , 
-                        * el cual nos indica que los resultados deben ser devueltos como un array asociativo, donde los nombres de las columnas de 
-                        * la tabla se utilizan como claves (keys) en el array. */
-                        while ($oDepartamento = $consultaPreparada->fetchObject()) {
-                            echo '<tr>';
-                            echo "<td>" . $oDepartamento->T02_CodDepartamento . "</td>";
-                            echo "<td>" . $oDepartamento->T02_DescDepartamento . "</td>";
-                            echo "<td>" . $oDepartamento->T02_FechaCreacionDepartamento . "</td>";
-                            echo "<td>" . $oDepartamento->T02_VolumenDeNegocio . "</td>";
-                            echo "<td>" . $oDepartamento->T02_FechaBajaDepartamento . "</td>";
-                            echo '</tr>';
-                        }
-                        ?>
+    <?php
+    /* Aqui recorremos todos los valores de la tabla, columna por columna, usando el parametro 'PDO::FETCH_ASSOC' , 
+     * el cual nos indica que los resultados deben ser devueltos como un array asociativo, donde los nombres de las columnas de 
+     * la tabla se utilizan como claves (keys) en el array. */
+    while ($oDepartamento = $consultaPreparada->fetchObject()) {
+        echo '<tr>';
+        echo "<td>" . $oDepartamento->T02_CodDepartamento . "</td>";
+        echo "<td>" . $oDepartamento->T02_DescDepartamento . "</td>";
+        echo "<td>" . $oDepartamento->T02_FechaCreacionDepartamento . "</td>";
+        echo "<td>" . $oDepartamento->T02_VolumenDeNegocio . "</td>";
+        echo "<td>" . $oDepartamento->T02_FechaBajaDepartamento . "</td>";
+        echo '</tr>';
+    }
+    ?>
                         <tr>
                             <td colspan="5"><?php echo "Numero de registros en la tabla departamentos: " . $consultaPreparada->rowCount(); ?></td>
                         </tr>
                     </table>
                 </div>
-            <?php
-            } catch (PDOException $pdoe) {
-                echo ('<p style="color:red">EXCEPCION PDO</p>' . $pdoe->getMessage());
-            } finally {
-                unset($miDB); //Para cerrar la conexión
-            }
-            ?>
+    <?php
+} catch (PDOException $pdoe) {
+    echo ('<p style="color:red">EXCEPCION PDO</p>' . $pdoe->getMessage());
+} finally {
+    unset($miDB); //Para cerrar la conexión
+}
+?>
         </main>
         <footer class="text-center bg-secondary fixed-bottom py-3">
             <div class="container">
